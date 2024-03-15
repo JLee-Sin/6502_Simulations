@@ -15,6 +15,7 @@ typedef unsigned int u32;
 #define LDA_zpx ((Byte) 0xB5)  //Load Accumulator (Zero Page, x)
 #define LDX_im  ((Byte) 0xA2)  //Load X Register (Immediate Mode)
 #define LDY_im  ((Byte) 0xA0)  //Load Y Register (Immediate Mode)
+#define JSR     ((Byte) 0x20)  //Jump to sub-Routine
 
 u32 numCycles = 0;
 
