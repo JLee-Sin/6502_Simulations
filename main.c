@@ -106,6 +106,8 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
         printf("pCounter: %d\n", *pCounter);
         Byte value;
         switch(instruction) {
+            case JSR:
+                break;
             case LDA_im:
                 printf("Load Accumulator (Immediate mode)\n");
                 value   = fetchInstruction(pCounter, pMemory, pCycles);
