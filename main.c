@@ -13,8 +13,9 @@ typedef unsigned int u32;
 #define LDA_zpx ((Byte) 0xB5)  //Load Accumulator (Zero Page, x)
 #define LDX_im  ((Byte) 0xA2)  //Load X Register (Immediate Mode)
 #define LDY_im  ((Byte) 0xA0)  //Load Y Register (Immediate Mode)
+#define JSR     ((Byte) 0x20)  //Jump to Sub-Routine
 
-u32 numCycles;
+u32 numCycles = 0;
 
 struct Memory {
     Byte data[Max_Mem];
@@ -78,7 +79,7 @@ void reset(struct CPU *pCpu, struct Memory *pMemory) {
     Byte registers[] = {pCpu->a, pCpu->x, pCpu->y};
     clearRegisters(registers);
     initMemory(pMemory);
-    printf("Reset Complete\n");
+    printf("Reset Complete\n\n");
 }
 
 Byte fetchInstruction(Word *pCounter, struct Memory *pMemory, u32 *pCycles){
@@ -97,7 +98,7 @@ Byte readInstruction(Byte address, struct Memory *pMemory, u32 *pCycles) {
 
 void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
     Word *pCounter = &pCpu->pCounter;
-    printf("\nExecuting %d cycles, starting at %d in memory...\n", *pCycles, *pCounter);
+    printf("Executing %d cycles, starting at %d in memory...\n", *pCycles, *pCounter);
     while(*pCycles > 0) {
         printf("\n");
         Byte instruction = fetchInstruction(pCounter, pMemory, pCycles);
@@ -194,8 +195,9 @@ int main() {
     //Hardcoded Testing
 
     //End Test
-
-    exec(&cpu, &memory, &numCycles);
+    if(numCycles != 0) {
+        exec(&cpu, &memory, &numCycles);
+    }
     printf("Terminating");
 
     return 0;
