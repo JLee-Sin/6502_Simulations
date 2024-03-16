@@ -5,5 +5,4 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(.)
 
-add_executable(CPU_Sim
-        main.c CPU.h Memory.h main.h CPU.c Memory.c)
+add_executable(CPU_Sim main.c)
