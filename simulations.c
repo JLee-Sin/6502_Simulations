@@ -86,7 +86,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->Z = 1;
                     printf("Set Zero flag\n");
                 }
-                if((pCpu->a & 0b10000000) < 0) {
+                if(((pCpu->a) & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative flag\n");
                 }
@@ -100,7 +100,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->Z = 1;
                     printf("Set Zero flag\n");
                 }
-                if((pCpu->a & 0b10000000) < 0) {
+                if((pCpu->a & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative flag\n");
                 }
@@ -116,7 +116,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->Z = 1;
                     printf("Set Zero flag\n");
                 }
-                if((pCpu->a & 0b10000000) < 0) {
+                if((pCpu->a & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative flag\n");
                 }
@@ -130,7 +130,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->Z = 1;
                     printf("Set Zero flag\n");
                 }
-                if((pCpu->x & 0b10000000) < 0) {
+                if((pCpu->x & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative Flag\n");
                 }
@@ -144,10 +144,13 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->Z = 1;
                     printf("Set Zero flag\n");
                 }
-                if((pCpu->y & 0b10000000) < 0) {
+                if((pCpu->y & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative Flag\n");
                 }
+                break;
+            case NOP:
+                printf("No Instruction was received\n");
                 break;
             default:
                 printf("No Instruction was received\n");

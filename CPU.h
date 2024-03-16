@@ -10,7 +10,7 @@ typedef unsigned short Word;
 
 struct CPU {
     Word pCounter; //ProgramCounter
-    Word sPointer; //Stack Pointer
+    Byte sPointer; //Stack Pointer
 
     //Registers, for clarity these are denoted with lower case letters
     Byte a; //Accumulator
