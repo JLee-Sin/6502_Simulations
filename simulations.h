@@ -13,13 +13,17 @@ typedef unsigned int u32;
 #define LDY_im  ((Byte) 0xA0)  //Load Y Register (Immediate Mode)
 #define JSR     ((Byte) 0x20)  //Jump to sub-Routine
 
-u32 numCycles = 3;
+u32 numCycles = 0;
 
 void reset(struct CPU *pCpu, struct Memory *pMemory);
 
-Byte fetchInstruction(Word *pCounter, struct Memory *pMemory, u32 *pCycles);
+Byte fetchInstructionByte(Word *pCounter, struct Memory *pMemory, u32 *pCycles);
 
 Byte readInstruction(Byte address, struct Memory *pMemory, u32 *pCycles);
+
+Word fetchInstructionWord(Word *pCounter, struct Memory *pMemory, u32 *pCycles);
+
+void writeWord(Word data, struct Memory *pMemory, u32 address, u32 *pCycles);
 
 void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles);
 
