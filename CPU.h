@@ -27,8 +27,8 @@ struct CPU {
     Byte N : 1; //Negative
 };
 
-void clearFlags(Byte *pFlags[]);
+void clearFlags(struct CPU *pCpu);
 
-void clearRegisters(Byte *pRegisters[]);
+void clearRegisters(struct CPU *pCpu);
 
 #endif //CPU_SIM_CPU_H

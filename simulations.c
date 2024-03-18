@@ -10,12 +10,8 @@ void reset(struct CPU *pCpu, struct Memory *pMemory) {
     pCpu->pCounter = 0xFFFC;
     pCpu->sPointer = 0x0100;
 
-    Byte flags[] = {pCpu->C, pCpu->Z, pCpu->I, pCpu->D, pCpu->B, pCpu->O, pCpu->N};
-    clearFlags(flags);
-
-    Byte registers[] = {pCpu->a, pCpu->x, pCpu->y};
-    clearRegisters(registers);
-
+    clearFlags(pCpu);
+    clearRegisters(pCpu);
     initMemory(pMemory);
 
     printf("Reset Complete\n\n");
@@ -122,7 +118,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                 }
                 break;
             case LDX_im:
-                printf("Load X Register (Immediate mode)\n");
+                printf("Load x Register (Immediate mode)\n");
                 value   = fetchInstructionByte(pCounter, pMemory, pCycles);
                 pCpu->x = value;
                 printf("Value loaded to Register: %d\n", pCpu->x);
@@ -136,7 +132,7 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                 }
                 break;
             case LDY_im:
-                printf("Load X Register (Immediate mode)\n");
+                printf("Load y Register (Immediate mode)\n");
                 value   = fetchInstructionByte(pCounter, pMemory, pCycles);
                 pCpu->y = value;
                 printf("Value loaded to Register: %d\n", pCpu->y);
