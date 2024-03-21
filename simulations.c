@@ -50,8 +50,10 @@ Byte readInstruction(Byte address, struct Memory *pMemory, u32 *pCycles) {
 
 void writeWord(Word data, struct Memory *pMemory, u32 address, u32 *pCycles) {
     pMemory->data[address] = data & 0xFF;
+    *pCycles -= 1;
+
     pMemory->data[address+1] = (data >> 8);
-    *pCycles -= 2;
+    *pCycles -= 1;
 }
 
 void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
