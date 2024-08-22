@@ -133,6 +133,36 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     printf("Set Negative Flag\n");
                 }
                 break;
+            case LDX_zp:
+                printf("Load x Register (Zero Page)\n");
+                value = fetchInstructionByte(pCounter, pMemory, pCycles);
+                pCpu->x = readInstruction(value, pMemory, pCycles);
+                printf("Value loaded to Register: %d\n", pCpu->x);
+                if(pCpu->x == 0) {
+                    pCpu->Z = 1;
+                    printf("Set Zero flag\n");
+                }
+                if((pCpu->x & (1 << 6)) > 0) {
+                    pCpu->N = 1;
+                    printf("Set Negative flag\n");
+                }
+                break;
+            case LDX_zpy:
+                printf("Load x Register (Zero Page, y)\n");
+                value   = fetchInstructionByte(pCounter, pMemory, pCycles);
+                value += pCpu->y;
+                *pCycles -= 1;
+                pCpu->x = readInstruction(value, pMemory, pCycles);
+                printf("Value loaded to Accumulator: %d\n", pCpu->a);
+                if(pCpu->x == 0) {
+                    pCpu->Z = 1;
+                    printf("Set Zero flag\n");
+                }
+                if((pCpu->x & (1 << 6)) > 0) {
+                    pCpu->N = 1;
+                    printf("Set Negative flag\n");
+                }
+                break;
             case LDY_im:
                 printf("Load y Register (Immediate mode)\n");
                 value   = fetchInstructionByte(pCounter, pMemory, pCycles);
@@ -145,6 +175,36 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                 if((pCpu->y & (1 << 6)) > 0) {
                     pCpu->N = 1;
                     printf("Set Negative Flag\n");
+                }
+                break;
+            case LDY_zp:
+                printf("Load x Register (Zero Page)\n");
+                value = fetchInstructionByte(pCounter, pMemory, pCycles);
+                pCpu->y = readInstruction(value, pMemory, pCycles);
+                printf("Value loaded to Register: %d\n", pCpu->y);
+                if(pCpu->y == 0) {
+                    pCpu->Z = 1;
+                    printf("Set Zero flag\n");
+                }
+                if((pCpu->y & (1 << 6)) > 0) {
+                    pCpu->N = 1;
+                    printf("Set Negative flag\n");
+                }
+                break;
+            case LDY_zpx:
+                printf("Load y Register (Zero Page, x)\n");
+                value   = fetchInstructionByte(pCounter, pMemory, pCycles);
+                value += pCpu->x;
+                *pCycles -= 1;
+                pCpu->y = readInstruction(value, pMemory, pCycles);
+                printf("Value loaded to Accumulator: %d\n", pCpu->a);
+                if(pCpu->y == 0) {
+                    pCpu->Z = 1;
+                    printf("Set Zero flag\n");
+                }
+                if((pCpu->y & (1 << 6)) > 0) {
+                    pCpu->N = 1;
+                    printf("Set Negative flag\n");
                 }
                 break;
             case NOP:
