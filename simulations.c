@@ -69,8 +69,8 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
             case JSR:
                 printf("Jump to Sub-Routine\n");
                 Word subAdd = fetchInstructionWord(pCounter, pMemory, pCycles);
-                writeWord(pCounter-1, pMemory, pCpu->sPointer, pCycles);
-                pMemory->data[pCpu->sPointer] = (pCounter - 1);
+                writeWord(*pCounter-1, pMemory, pCpu->sPointer, pCycles);
+                pMemory->data[pCpu->sPointer] = (*pCounter - 1);
                 pCpu->sPointer += 1;
                 *pCounter = subAdd;
                 *pCycles -= 2;
@@ -118,6 +118,9 @@ void exec(struct CPU *pCpu, struct Memory *pMemory, u32 *pCycles) {
                     pCpu->N = 1;
                     printf("Set Negative flag\n");
                 }
+                break;
+            case LDA_ab:
+
                 break;
             case LDX_im:
                 printf("Load x Register (Immediate mode)\n");
